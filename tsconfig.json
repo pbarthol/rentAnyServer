@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+//    "lib": ["es6", "dom"],
+    "mapRoot": "./",
+    "module": "commonjs",
+    "moduleResolution": "node",
+//    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "target": "es5",
+    "inlineSources": true
+//    "typeRoots": [
+//      "../node_modules/@types"
+//    ]
+  },
+
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
+  "files": [
+    "./src/models/accommodation.ts",
+    "./src/controllers/accommodationController.ts"
+//    "./src/controllers/userController.ts",
+//    "./src/controllers/bookingController.ts",
+//    "./src/controllers/uploadController.ts",
+//    "./src/models/upload"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
+
+}
