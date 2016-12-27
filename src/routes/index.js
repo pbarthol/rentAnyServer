@@ -26,7 +26,8 @@ router.post("/login", login.login);
 router.post("/booking", booking.addBooking);
 router.get("/booking/:id", booking.getBooking);
 router.get("/bookings", booking.getAllBookings);
-router.get("/bookings/:id", booking.getBookingsForUser);
+router.get("/bookings/user/:id", booking.getUserBookings);
+router.get("/bookings/accommodation/:id", booking.getAccoommodationBookings);
 
 // router.put("/user", function updateUser(req, res) {
 router.post("/user/update", function updateUser(req, res) {
