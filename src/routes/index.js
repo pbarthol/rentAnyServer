@@ -8,6 +8,7 @@ var login = require('../controllers/loginController');
 var booking = require("../controllers/bookingController");
 var Upload = require('../models/upload');
 var User = require("../models/user");
+var config = require('../config/database');
 // var uploads = require("../controllers/uploadController");
 
 /* GET home page. */
@@ -25,15 +26,15 @@ router.post("/login", login.login);
 router.post("/booking", booking.addBooking);
 router.get("/booking/:id", booking.getBooking);
 router.get("/bookings", booking.getAllBookings);
-router.get("/bookings/user/:id", booking.getUserBookings);
-router.get("/bookings/accommodation/:id", booking.getAccoommodationBookings);
+router.get("/bookings/:id", booking.getBookingsForUser);
 
 // router.put("/user", function updateUser(req, res) {
 router.post("/user/update", function updateUser(req, res) {
   console.log("Update User started");
   var user = req.body.user;
   // First delete already saved avatar file
-  var avatarPathFile = path.join("D:\\CAS-FEE\\Server\\public\\uploads\\", user._id, ".jpg");
+  // var avatarPathFile = path.join("D:\\CAS-FEE\\Server\\public\\uploads\\", user._id, ".jpg");
+  var avatarPathFile = path.join('./public/uploads', user._id, ".jpg");
 
   fs.stat(avatarPathFile, function(err, stat) {
     if(err == null || err.code == 'ENOENT' ) {
@@ -64,18 +65,17 @@ router.post("/user/update", function updateUser(req, res) {
                   if (err) {
                     console.log("Upload Delete Error:")
                     console.log(err);
-                    // return res.status(500).send({error: 'Upload delete failed.'});
-                    return res.status(500).send({error: 'Upload des Bildes fehlgeschlagen!'});
+                    return res.status(500).send({error: 'Upload delete failed.'});
                   }
                   else {
-                    user.avatar = 'http://localhost:8080/uploads/' + user._id + ".jpg";
+                    // user.avatar = 'http://localhost:8080/uploads/' + user._id + ".jpg";
+                    user.avatar = config.database + user._id + ".jpg";
                     var query = {'_id': user._id};
                     User.findOneAndUpdate(query, user, function (err, user) {
                       if (err)
                         return res.send(500, { error: err });
                       else {
-                        // return res.send(200, JSON.stringify(user));
-                        res.send(JSON.stringify(user));
+                        return res.send(200, JSON.stringify(user));
                       }
                     });
                   }

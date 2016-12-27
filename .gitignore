@@ -1,41 +1,4 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
+node_modules
 
-# compiled output
-/dist
-/tmp
-
-# dependencies
-/node_modules
-/bower_components
-
-# IDEs and editors
-/.idea
-.project
-.classpath
-*.launch
-.settings/
-
-# misc
-/.sass-cache
-/connect.lock
-/coverage/*
-/libpeerconnection.log
-npm-debug.log
-testem.log
-/typings
-
-
-#System Files
-.DS_Store
-Thumbs.db
-
-/data/journal
-/data/diagnostic.data
-/data/WiredTigerLAS.wt
-/data/mongod.lock
-/data/sizeStorer.wt
-/data/storage.bson
-/data/WiredTiger
-/data/WiredTiger.lock
-/data/WiredTiger.turtle
-/data/WiredTiger.wt
+data/

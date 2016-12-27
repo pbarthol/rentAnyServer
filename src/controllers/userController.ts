@@ -5,6 +5,8 @@
 "use strict";
 import bcrypt = require('bcryptjs');
 import crypto = require('crypto');
+// import crypto = require('crypto');
+// import mongoose = require('mongoose');
 import mongoose = require('mongoose');
 import User     = require("../models/user");
 import moment 	= require('moment');
@@ -105,51 +107,19 @@ export function addUser(req, res) {
                     return res.status(500).send({error: 'E-Mail bereits vergeben!'});
                 }
                 else {
-                    saltAndHash(newUser.password, function (hash) {
-                        newUser.password = hash;
-                        // append date stamp when record was created //
-                        newUser.createddate = moment().format();
-                        newUser._id = ObjectId();
-                        newUser.save(function (err, user) {
-                            if (err) {
-                                console.log(err);
-                                // return res.status(500).send({success: false, msg: 'User save() failed.'});
-                                return res.status(500).send({error: 'Benutzer speichern fehlgeschlagen!'});
-                            }
-                            return res.json(user);
-                        })
+                    // append date stamp when record was created //
+                    newUser.createddate = moment().format();
+                    newUser._id = ObjectId();
+                    newUser.save(function (err, user) {
+                        if (err) {
+                            console.log(err);
+                            // return res.status(500).send({success: false, msg: 'User save() failed.'});
+                            return res.status(500).send({error: 'User save() failed.'});
+                        }
+                        return res.json(user);
                     })
                 }
             })
         }
     })
-}
-
-var generateSalt = function()
-{
-    var set = '0123456789abcdefghijklmnopqurstuvwxyzABCDEFGHIJKLMNOPQURSTUVWXYZ';
-    var salt = '';
-    for (var i = 0; i < 10; i++) {
-        var p = Math.floor(Math.random() * set.length);
-        salt += set[p];
-    }
-    return salt;
-}
-
-var saltAndHash = function(password, callback)
-{
-    var salt = generateSalt();
-    callback(salt + md5(password + salt));
-}
-
-var md5 = function(str) {
-    return crypto.createHash('md5').update(str).digest('hex');
-    // return bcrypt.createHash('md5').update(str).digest('hex');
-}
-
-var validatePassword = function(plainPass, hashedPass, callback)
-{
-    var salt = hashedPass.substr(0, 10);
-    var validHash = salt + md5(plainPass + salt);
-    callback(null, hashedPass === validHash);
 }

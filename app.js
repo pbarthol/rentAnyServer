@@ -15,9 +15,8 @@ var uploadController = require('./src/controllers/uploadController');
 var app = express();
 // app.use(cors());
 
-var upload = multer(
-    { dest: 'D://CAS-FEE/Server/public/uploads/images'
-    });
+// var upload = multer({ dest: 'D://CAS-FEE/Server/public/uploads'});
+var upload = multer({ dest: './public/uploads'});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,8 +24,8 @@ app.set('view engine', 'jade');
 
 // WICHTIG! Der Header muss an dieser Stelle konstruiert werden
 app.use(function (req, res, next) {
-  // res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+  res.header("Access-Control-Allow-Origin", "*");
+  // res.header("Access-Control-Allow-Origin", "http://localhost:4200");
 //   res.header('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, X-Access-Token, X-Custom-Header, Content-Type, Accept");
   // res.header("Access-Control-Request-Method", "POST, GET, PUT, DELETE");
