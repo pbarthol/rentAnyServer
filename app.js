@@ -16,7 +16,7 @@ var app = express();
 // app.use(cors());
 
 // var upload = multer({ dest: 'D://CAS-FEE/Server/public/uploads'});
-var upload = multer({ dest: './public/uploads'});
+var upload = multer({ dest: '../public/uploads'});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
